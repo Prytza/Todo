@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @postit.title %>
+</p>
+
+<p>
+  <b>Content:</b>
+  <%= @postit.content %>
+</p>
+
+<p>
+  <b>Create timestamp:</b>
+  <%= @postit.create_timestamp %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%= @postit.status %>
+</p>
+
+<p>
+  <b>Deadline timestamp:</b>
+  <%= @postit.deadline_timestamp %>
+</p>
+
+
+<%= link_to 'Edit', edit_postit_path(@postit) %> |
+<%= link_to 'Back', postits_path %>

@@ -1,0 +1,39 @@
+<%= form_for(@postit) do |f| %>
+  <% if @postit.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@postit.errors.count, "error") %> prohibited this postit from being saved:</h2>
+
+      <ul>
+      <% @postit.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :content %><br />
+    <%= f.text_area :content %>
+  </div>
+  
+  <!--<div class="field">
+    <%= f.label :create_timestamp %><br />
+    <%= f.datetime_select :create_timestamp %>
+  </div>-->
+
+  <div class="field">
+    <%= f.label :status %><br />
+    <%= f.text_field :status %>
+  </div>
+  <div class="field">
+    <%= f.label :deadline_timestamp %><br />
+    <%= f.datetime_select(:deadline_timestamp, :default => 3.days.from_now) %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
