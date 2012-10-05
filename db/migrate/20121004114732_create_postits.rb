@@ -3,7 +3,6 @@ class CreatePostits < ActiveRecord::Migration
     create_table :postits do |t|
       t.string :title
       t.text :content
-      t.datetime :create_timestamp
       t.string :status
       t.datetime :deadline_timestamp
 

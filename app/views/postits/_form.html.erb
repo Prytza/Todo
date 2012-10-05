@@ -27,7 +27,7 @@
 
   <div class="field">
     <%= f.label :status %><br />
-    <%= f.text_field :status %>
+    <%= f.select :status, [['Ny','new'],['Pågår','active'],['Klar','done']] %>
   </div>
   <div class="field">
     <%= f.label :deadline_timestamp %><br />

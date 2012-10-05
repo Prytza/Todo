@@ -24,10 +24,8 @@ ActiveRecord::Schema.define(:version => 20121004143610) do
   end
 
   create_table "statuses", :force => true do |t|
-    t.string   "status"
-    t.integer  "postit_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string  "status"
+    t.integer "postit_id"
   end
 
   add_index "statuses", ["postit_id"], :name => "index_statuses_on_postit_id"
