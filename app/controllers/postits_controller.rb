@@ -1,4 +1,7 @@
 class PostitsController < ApplicationController
+  
+  before_filter :authenticate_user!
+
   # GET /postits
   # GET /postits.json
   def index
@@ -42,7 +45,8 @@ class PostitsController < ApplicationController
   def create
     @postit = Postit.new(params[:postit])
 
-    @postit.create_timestamp = Time.now
+    # @postit.create_timestamp = Time.now
+    @postit.created_at = Time.now
 
     respond_to do |format|
       if @postit.save

@@ -11,8 +11,8 @@
 </p>
 
 <p>
-  <b>Create timestamp:</b>
-  <%= @postit.create_timestamp %>
+  <b>Created at:</b>
+  <%= @postit.created_at.to_s(:db) %>
 </p>
 
 <p>
@@ -22,7 +22,7 @@
 
 <p>
   <b>Deadline timestamp:</b>
-  <%= @postit.deadline_timestamp %>
+  <%= @postit.deadline_timestamp.to_s(:db) %>
 </p>
 
 

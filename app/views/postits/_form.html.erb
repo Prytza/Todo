@@ -19,15 +19,10 @@
     <%= f.label :content %><br />
     <%= f.text_area :content %>
   </div>
-  
-  <!--<div class="field">
-    <%= f.label :create_timestamp %><br />
-    <%= f.datetime_select :create_timestamp %>
-  </div>-->
 
   <div class="field">
     <%= f.label :status %><br />
-    <%= f.select :status, [['Ny','new'],['Pågår','active'],['Klar','done']] %>
+    <%= f.select :status, [['Ny','Ny'],['Pågår','Pågår'],['Klar','Klar><']] %>
   </div>
   <div class="field">
     <%= f.label :deadline_timestamp %><br />

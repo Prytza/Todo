@@ -1,4 +1,6 @@
 Todo::Application.routes.draw do
+  devise_for :users
+
   resources :postits do
     # resources :statuses
   end

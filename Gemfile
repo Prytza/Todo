@@ -38,3 +38,4 @@ gem 'jquery-rails'
 # gem 'debugger'
 
 gem 'bootstrap-sass' #twitter boostapp
+gem 'devise' #authentication

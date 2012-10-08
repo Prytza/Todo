@@ -4,9 +4,8 @@
   <tr>
     <th>Title</th>
     <th>Content</th>
-    <th>Create timestamp</th>
     <th>Status</th>
-    <th>Deadline timestamp</th>
+    <th>Deadline</th>
     <th></th>
     <th></th>
     <th></th>
@@ -16,9 +15,8 @@
   <tr>
     <td><%= postit.title %></td>
     <td><%= postit.content %></td>
-    <td><%= postit.create_timestamp %></td>
     <td><%= postit.status %></td>
-    <td><%= postit.deadline_timestamp %></td>
+    <td><%= postit.deadline_timestamp.to_formatted_s(:short) %></td>
     <td><%= link_to 'Show', postit %></td>
     <td><%= link_to 'Edit', edit_postit_path(postit) %></td>
     <td><%= link_to 'Destroy', postit, method: :delete, data: { confirm: 'Are you sure?' } %></td>

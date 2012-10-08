@@ -1,0 +1,11 @@
+<h1>My ToDo List</h1>
+<%= link_to "My PosIts", postits_path %>
+
+<section class="span4">
+    <% if !user_signed_in? %>
+      <%= render :partial => 'devise/sessions/new' %>
+    <% else %>
+      <p>Show me some crazy graphs! Apa</p>
+      <%= link_to 'Sign out', destroy_user_session_path, :method => :delete %>
+    <% end %>
+</section>
