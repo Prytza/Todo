@@ -1,6 +1,7 @@
 <h1>Listing postits</h1>
 
-<table>
+<table id="products" class="display">
+  <thead>
   <tr>
     <th>Responsible</th>
     <th>Title</th>
@@ -11,7 +12,8 @@
     <th></th>
     <th></th>
   </tr>
-
+</thead>
+<tbody>
 <% @postits.each do |postit| %>
   <tr>
     <td><%= postit.user.name%></td>
@@ -24,6 +26,7 @@
     <td><%= link_to 'Destroy', postit, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
+</tbody>
 </table>
 
 <br />

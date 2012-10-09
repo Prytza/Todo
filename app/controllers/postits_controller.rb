@@ -6,7 +6,7 @@ class PostitsController < ApplicationController
   # GET /postits.json
   def index
     @postits = Postit.all
-
+    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @postits }
