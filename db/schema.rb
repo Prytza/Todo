@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121008114410) do
+ActiveRecord::Schema.define(:version => 20121009074640) do
 
   create_table "postits", :force => true do |t|
     t.string   "title"
@@ -20,7 +20,10 @@ ActiveRecord::Schema.define(:version => 20121008114410) do
     t.datetime "deadline_timestamp"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
+    t.integer  "user_id"
   end
+
+  add_index "postits", ["user_id"], :name => "index_postits_on_user_id"
 
   create_table "statuses", :force => true do |t|
     t.string  "status"
@@ -42,6 +45,7 @@ ActiveRecord::Schema.define(:version => 20121008114410) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
+    t.string   "name"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

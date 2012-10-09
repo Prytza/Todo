@@ -2,6 +2,7 @@
 
 <table>
   <tr>
+    <th>Responsible</th>
     <th>Title</th>
     <th>Content</th>
     <th>Status</th>
@@ -13,6 +14,7 @@
 
 <% @postits.each do |postit| %>
   <tr>
+    <td><%= postit.user.name%></td>
     <td><%= postit.title %></td>
     <td><%= postit.content %></td>
     <td><%= postit.status %></td>

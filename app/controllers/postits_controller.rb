@@ -17,7 +17,7 @@ class PostitsController < ApplicationController
   # GET /postits/1.json
   def show
     @postit = Postit.find(params[:id])
-
+    @user = @postit.user
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @postit }
@@ -44,8 +44,9 @@ class PostitsController < ApplicationController
   # POST /postits.json
   def create
     @postit = Postit.new(params[:postit])
+    @postit.user = current_user
 
-    # @postit.create_timestamp = Time.now
+    # behövs den här raden? sätts tiden i databasen ändå?
     @postit.created_at = Time.now
 
     respond_to do |format|

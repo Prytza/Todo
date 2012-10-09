@@ -1,9 +1,11 @@
 Todo::Application.routes.draw do
   devise_for :users
 
-  resources :postits do
-    # resources :statuses
+  resources :users do
+    resources :postits
   end
+
+  resources :postits
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
