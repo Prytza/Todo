@@ -12,7 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require dataTables/jquery.dataTables
 //= require bootstrap
+//= require dataTables/jquery.dataTables
+//= require dataTables/jquery-ui-1.9.0.custom
 //= require_tree .
-

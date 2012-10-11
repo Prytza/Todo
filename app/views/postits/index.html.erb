@@ -23,7 +23,10 @@
     <td><%= postit.deadline_timestamp.to_formatted_s(:short) %></td>
     <td><%= link_to 'Show', postit %></td>
     <td><%= link_to 'Edit', edit_postit_path(postit) %></td>
-    <td><%= link_to 'Destroy', postit, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to postit, method: :delete, data: { confirm: 'Are you sure?' } do %>
+      <span class="ui-icon ui-icon-trash"></span>
+      <% end %>
+    </td>
   </tr>
 <% end %>
 </tbody>
