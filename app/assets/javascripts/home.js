@@ -8,72 +8,120 @@ if (Modernizr.draganddrop) {
 	}
 */
 
+var dragItemElement = null;
+
 function doWhenLoad() {
-
-	/*Gör att andra objekt än img och a taggar fungerar med DnD i firefox*/
-	/*
-	var dragItems = document.querySelectorAll('[draggable=true]');
-
-	for (var i = 0; i < dragItems.length; i++) {
-	  dragItems[i].addEventListener('dragstart', function (event) {
-		// store the ID of the element, and collect it on the drop later on
-		
-		// event.originalEvent.dataTransfer.setData('Text', this.id)
-		event.dataTransfer.setData('Text', this.id);
-	  }, false);
-	}
-	*/
 
 	/*Hämtar draggable items*/
 	var bikes = $("#drag_items li");
-	// console.log(bikes);
-	
-	for (var i = 0; i < bikes.length; i++) {
-		bikes[i].addEventListener('dragstart', dragStart, false);
-		bikes[i].addEventListener('dragend', dragEnd, false);
-	}
+	addEventListenersForDragItems (bikes, "list");
 
 	var dropZones = $(".drop_zones");
-	// console.log(dropZones);
+	addEventListenersForDropZones(dropZones, "list");
 
-	for (var i = 0; i < dropZones.length; i++) {
-		dropZones[i].addEventListener("dragover", dragOver, false);
+}
 
-		dropZones[i].addEventListener("dragenter", dragEnter, false);
-		
-		dropZones[i].addEventListener("dragleave", dragLeave, false);
-		dropZones[i].addEventListener("dragexit", dragLeave, false); // Firefox
-		
-		dropZones[i].addEventListener("drop", dropped, false); // borde funka?! Firefox from version 3.5, Google Chrome, Safari, Internet Exlorer
-		dropZones[i].addEventListener("dragdrop", dropped, false); // Firefox before version 3.5
+function addEventListenersForDragItems (dragitems, type) {
+
+	if (type == "list") {
+		for (var i = 0; i < dragitems.length; i++) {
+			dragitems[i].addEventListener('dragstart', dragStartList, false);
+			dragitems[i].addEventListener('dragend', dragEndList, false);
+		}
 	}
+	else if (type == "panel") {
+		for (var i = 0; i < dragitems.length; i++) {
+			dragitems[i].addEventListener('dragstart', dragStartPanel, false);
+			dragitems[i].addEventListener('dragend', dragEndPanel, false);
+		}
+	}
+	else {
+		console.log("param 'type' must be set to 'list' or 'panel'");
+	}
+
 }
 
-function dragStart (event) {
+function addEventListenersForDropZones (dropZones, type) {
 
-	//console.log(event);
-	// alert("start");
-	event.dataTransfer.setData('Text', event.currentTarget.innerHTML);
+	if (type == "list") {
+		for (var i = 0; i < dropZones.length; i++) {
+			dropZones[i].addEventListener("dragover", dragOverList, false);
+
+			dropZones[i].addEventListener("dragenter", dragEnterList, false);
+			
+			dropZones[i].addEventListener("dragleave", dragLeaveList, false);
+			dropZones[i].addEventListener("dragexit", dragLeaveList, false); // Firefox
+			
+			dropZones[i].addEventListener("drop", droppedList, false); // borde funka?! Firefox from version 3.5, Google Chrome, Safari, Internet Exlorer
+			dropZones[i].addEventListener("dragdrop", droppedList, false); // Firefox before version 3.5
+		}
+	}
+	else if (type == "panel") {
+		for (var i = 0; i < dropZones.length; i++) {
+			dropZones[i].addEventListener("dragover", dragOverPanel, false);
+
+			dropZones[i].addEventListener("dragenter", dragEnterPanel, false);
+			
+			dropZones[i].addEventListener("dragleave", dragLeavePanel, false);
+			dropZones[i].addEventListener("dragexit", dragLeavePanel, false); // Firefox
+			
+			dropZones[i].addEventListener("drop", droppedPanel, false); // borde funka?! Firefox from version 3.5, Google Chrome, Safari, Internet Exlorer
+			dropZones[i].addEventListener("dragdrop", droppedPanel, false); // Firefox before version 3.5
+		}
+	}
+	else {
+		console.log("param 'type' must be set to 'list' or 'panel'");
+	}
+
 }
 
-function dragEnd (event) {
+function dragStartList (event) {
+	var format = "Text";
+	event.dataTransfer.setData(format, event.currentTarget.innerHTML);
+}
+
+function dragStartPanel (event) {
+	var format = "Text";
+	event.dataTransfer.setData(format, event.currentTarget.innerHTML);
+	dragItemElement = this;
+	// alert(dragItemElement);
+
+	//event.dataTransfer.effectAllowed = 'move';
+  	//event.dataTransfer.setData('text/html', this.innerHTML);
+}
+
+function dragEndList (event) {
+
+	var draggableItem = $(event.currentTarget);
+
+	draggableItem.addClass("used_items");
+	draggableItem.attr("draggable", "false");
+	draggableItem.css("cursor", "default");
+
+}
+
+function dragEndPanel (event) {
 
 	console.log(event);
 
 	var draggableItem = $(event.currentTarget);
 
-	// console.log(draggableItem);
+	console.log(draggableItem);
 
-	draggableItem.addClass("used_items");
+	draggableItem.attr("draggable", "false");
+	draggableItem.css({background: "none"});
+	draggableItem.text("");
 
-	//console.log("attributes = " + event.attributes);
+	var format = "Text";
+	var formatContent = event.dataTransfer.getData(format);
+	console.log("formatContent = " + formatContent);
 
 }
 
-function dragEnter (event) {
+function dragEnterList (event) {
 
 	if (event.preventDefault) {
-    	event.preventDefault(); // Necessary. Allows us to drop.
+    	event.preventDefault();
 	}
 
 	var draggableItem = $(event.currentTarget);
@@ -83,7 +131,20 @@ function dragEnter (event) {
 
 }
 
-function dragOver (event) {
+function dragEnterPanel (event) {
+
+	if (event.preventDefault) {
+    	event.preventDefault();
+	}
+
+	var draggableItem = $(event.currentTarget);
+	draggableItem.addClass("highlight");
+
+	return false;
+
+}
+
+function dragOverList (event) {
 
 	if (event.preventDefault) {
     	event.preventDefault(); // Necessary. Allows us to drop.
@@ -91,59 +152,148 @@ function dragOver (event) {
 
 	return false;
 
-	/*
-	event.preventDefault();
-
-	var id = event.dataTransfer.getData('Text');
-	//console.log(id);
-
-	event.currentTarget.innerHTML = id;
-	*/
-
 }
 
-function dragLeave (event) {
+function dragOverPanel (event) {
 
 	if (event.preventDefault) {
     	event.preventDefault(); // Necessary. Allows us to drop.
 	}
 
-	//event.currentTarget.innerHTML = "";
+	return false;
+
+}
+
+function dragLeaveList (event) {
+
+	if (event.preventDefault) {
+    	event.preventDefault();
+	}
 
 	var draggableItem = $(event.currentTarget);
 	draggableItem.removeClass("highlight");
 
 }
 
-function dropped (event) {
+function dragLeavePanel (event) {
+
+	if (event.preventDefault) {
+    	event.preventDefault();
+	}
+
+	var draggableItem = $(event.currentTarget);
+	draggableItem.removeClass("highlight");
+
+}
+
+function droppedList (event) {
 
 	event.preventDefault(); // utan denna sker en redirect url på eventets innehåll.. firefox default?
 	// event.stopPropagation() // borde fungera med denna för att slippa ovan nämnda händelse.
 
-	var content = event.dataTransfer.getData('Text').toLowerCase();
+	var format = "Text";
+
+	var content = event.dataTransfer.getData(format).toLowerCase();
 	console.log(content);
+	//event.dataTransfer.clearData(format);
 
 	event.currentTarget.innerHTML = event.currentTarget.id;
 
-//	$(event.currentTarget.id);
-	var targetElement = $(event.currentTarget)
-	console.log(targetElement);
 	
-	targetElement.text("Hej")
+	var targetElement = $(event.currentTarget);
+
+	targetElement.text(content)
+				 .attr("draggable", "true")
 				 .css("color", "lime")
 				 .css('background', '#fff url("/assets/' + content + '.jpg") no-repeat bottom left')
 				 .css('background-size', '100% Auto');
 
 	var draggableItem = $(event.currentTarget);
 	draggableItem.removeClass("highlight");
+
+	draggableItem.removeClass("used_items");
+
+	addEventListenersForDragItems(targetElement, "panel");
+	addEventListenersForDropZones(targetElement, "panel");
+
+	var targetElementId = event.currentTarget.id;
+	console.log(targetElementId);
+
 }
 
-/*
-window.addEventListener("load", doWhenLoad, false);
-*/
+function droppedPanel (event) {
+
+	event.stopPropagation() // borde fungera med denna för att slippa ovan nämnda händelse.
+	event.preventDefault(); // utan denna sker en redirect url på eventets innehåll.. firefox default?
+
+	// Don't do anything if dropping the same column we're dragging.
+  	if (dragItemElement != this) {
+	    // Set the source column's HTML to the HTML of the column we dropped on.
+	    
+	    //dragItemElement.innerHTML = this.innerHTML;
+	    //this.innerHTML = event.dataTransfer.getData('text/html');
+  		
+	    // console.log( "dragItemElement " + dragItemElement);
+
+	    var format = "Text";
+
+		var content = event.dataTransfer.getData(format).toLowerCase();
+		console.log(content);
+		// event.dataTransfer.clearData(format);
+
+		event.currentTarget.innerHTML = event.currentTarget.id;
+
+		var targetElement = $(event.currentTarget);
+
+		targetElement.text(content)
+					 .attr("draggable", "true")
+					 .css("color", "lime")
+					 .css('background', '#fff url("/assets/' + content + '.jpg") no-repeat bottom left')
+					 .css('background-size', '100% Auto');
+
+		var draggableItem = $(event.currentTarget);
+		draggableItem.removeClass("highlight");
+
+		draggableItem.removeClass("used_items");
+
+		addEventListenersForDragItems(targetElement, "panel");
+		addEventListenersForDropZones(targetElement, "panel");
+
+		var targetElementId = event.currentTarget.id;
+		console.log(targetElementId);
+
+
+  	}
+
+	
+
+  return false;
+
+}
 
 $(function () {
 
 	doWhenLoad();
+
+	$("#viewPickedItems").click(function () {
+
+		var pickedValues = $(".drop_zones");
+		var values = [];
+		var list = "";
+
+		for (var i = 0; i < pickedValues.length; i++) {
+
+			if (pickedValues[i].innerHTML == "") {
+				values.push(0);
+			}
+			else {
+				values.push(pickedValues[i].innerHTML);
+			}
+
+		}
+
+		console.log(values);
+
+	});
 
 });
