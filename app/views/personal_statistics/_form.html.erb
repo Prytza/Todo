@@ -1,0 +1,26 @@
+<%= form_for(@personal_statistic) do |f| %>
+  <% if @personal_statistic.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@personal_statistic.errors.count, "error") %> prohibited this personal_statistic from being saved:</h2>
+
+      <ul>
+      <% @personal_statistic.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :nr_of_dropzones %><br />
+    <%= f.number_field :nr_of_dropzones %>
+  </div>
+  <div class="field">
+    <%= f.label :item_array %><br />
+    <%= f.text_field :item_array %>
+  </div>
+  
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

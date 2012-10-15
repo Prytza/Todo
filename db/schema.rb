@@ -11,7 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121009074640) do
+ActiveRecord::Schema.define(:version => 20121012121054) do
+
+  create_table "personal_statistics", :force => true do |t|
+    t.integer  "nr_of_dropzones"
+    t.string   "item_array"
+    t.integer  "user_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  add_index "personal_statistics", ["user_id"], :name => "index_personal_statistics_on_user_id"
 
   create_table "postits", :force => true do |t|
     t.string   "title"

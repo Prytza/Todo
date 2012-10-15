@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Nr of dropzones:</b>
+  <%= @personal_statistic.nr_of_dropzones %>
+</p>
+
+<p>
+  <b>Item array:</b>
+  <%= @personal_statistic.item_array %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @personal_statistic.user.name %>
+</p>
+
+
+<%= link_to 'Edit', edit_personal_statistic_path(@personal_statistic) %> |
+<%= link_to 'Back', personal_statistics_path %>

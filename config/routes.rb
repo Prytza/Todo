@@ -1,4 +1,6 @@
 Todo::Application.routes.draw do
+  resources :personal_statistics
+
   devise_for :users
 
   resources :users do

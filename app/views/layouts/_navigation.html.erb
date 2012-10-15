@@ -4,6 +4,9 @@
     <li>
       <%= link_to 'Postits', postits_path %>
     <li>
+    <li>
+      <%= link_to 'My Bikes', personal_statistics_path %>
+    <li>
   <% if user_signed_in? %>
     <li>
     <%= link_to('Logout', destroy_user_session_path, :method=>'delete') %>        

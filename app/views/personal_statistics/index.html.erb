@@ -1,0 +1,45 @@
+<%= provide(:nr_of_dropzones) %>
+
+<h1>Listing My Bikes</h1>
+
+<div id="postit" class="span4">
+  <ul id="drag_items">
+    <li draggable="true">Giant</li>
+    <li draggable="true">Focus</li>
+    <li draggable="true">Scott</li>
+    <li draggable="true">KHS</li>
+    <li draggable="true">Cervelo</li>
+    <li draggable="true">Felt</li>
+    <li draggable="true">Garyfisher</li>
+    <li draggable="true">Trek</li>
+  </ul>
+</div>
+
+<form id="choice_of_dropzones">
+  <select>
+    <option value="3">Tre</option>
+    <option value="4">Fyra</option>
+    <option value="5">Fem</option>
+    <option value="6">Sex</option>
+  </select>
+  <input type="submit" value="Välj" />
+</form>
+
+<%= debug @personal_statistics %>
+
+<div id="drop_zone_wrapper">
+
+  <% $i = 0;
+     $num = @personal_statistics.nr_of_dropzones.to_i;
+     $drop_zone_id = "";
+     
+     until $i >= $num  do $drop_zone_id = "drop_zone_" + ($i + 1).to_s %>
+
+  <div id="<%= $drop_zone_id %>" class="drop_zones span2"></div>
+
+   <% $i +=1;
+   end %>
+
+</div>
+
+<!--<input type="button" value="viewPickedItems" id="viewPickedItems" />-->

@@ -1,0 +1,25 @@
+<table>
+  <tr>
+    <th>Nr of dropzones</th>
+    <th>Item array</th>
+    <th>User</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @personal_statistics.each do |personal_statistic| %>
+  <tr>
+    <td><%= personal_statistic.nr_of_dropzones %></td>
+    <td><%= personal_statistic.item_array %></td>
+    <td><%= personal_statistic.user %></td>
+    <td><%= link_to 'Show', personal_statistic %></td>
+    <td><%= link_to 'Edit', edit_personal_statistic_path(personal_statistic) %></td>
+    <td><%= link_to 'Destroy', personal_statistic, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Personal statistic', new_personal_statistic_path %>

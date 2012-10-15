@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  nr_of_dropzones: 1
+  item_array: MyString
+  user: 
+
+two:
+  nr_of_dropzones: 1
+  item_array: MyString
+  user: 
